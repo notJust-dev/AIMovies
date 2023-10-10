@@ -1,11 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, FlatList, SafeAreaView } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  SafeAreaView,
+  TextInput,
+  Button,
+} from 'react-native';
 import { supabase } from '../lib/supabase';
 import MovieItem from '../components/MovieItem';
 
 export default function App() {
   const [movies, setMovies] = useState([]);
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -21,9 +30,24 @@ export default function App() {
     fetchMovies();
   }, []);
 
+  const onPress = () => {
+    setQuery('');
+  };
+
   return (
     <View style={styles.container}>
       <SafeAreaView>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <TextInput
+            placeholder="AI: Search for movies..."
+            placeholderTextColor={'gray'}
+            style={styles.input}
+            value={query}
+            onChangeText={setQuery}
+          />
+          <Button title="Search" onPress={onPress} />
+        </View>
+
         <FlatList data={movies} renderItem={MovieItem} />
       </SafeAreaView>
 
@@ -36,5 +60,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#181413',
+  },
+  input: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: 'gray',
+    padding: 15,
+    margin: 10,
+    borderRadius: 10,
+    color: 'gainsboro',
   },
 });
