@@ -1,3 +1,4 @@
+import { Link } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 type MovieItemPros = {
@@ -7,13 +8,15 @@ type MovieItemPros = {
 
 const MovieItem = ({ item: movie, index }: MovieItemPros) => {
   return (
-    <Pressable style={styles.container}>
-      <Text style={styles.index}>#{index + 1}</Text>
-      <View style={{ flex: 1 }}>
-        <Text style={styles.title}>{movie.title}</Text>
-        <Text style={styles.subtitle}>{movie.tagline}</Text>
-      </View>
-    </Pressable>
+    <Link href={`/${movie.id}`} asChild>
+      <Pressable style={styles.container}>
+        <Text style={styles.index}>#{index + 1}</Text>
+        <View style={{ flex: 1 }}>
+          <Text style={styles.title}>{movie.title}</Text>
+          <Text style={styles.subtitle}>{movie.tagline}</Text>
+        </View>
+      </Pressable>
+    </Link>
   );
 };
 

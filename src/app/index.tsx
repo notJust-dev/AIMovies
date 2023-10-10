@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, FlatList, SafeAreaView } from 'react-native';
-import { supabase } from './src/lib/supabase';
-import MovieItem from './src/components/MovieItem';
+import { supabase } from '../lib/supabase';
+import MovieItem from '../components/MovieItem';
 
 export default function App() {
   const [movies, setMovies] = useState([]);
